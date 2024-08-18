@@ -48,14 +48,17 @@ export abstract class ChromeStorage<
     protected defaultData?: T
   ) {
     this.storage = storage;
+    this.setup();
   }
 
   async setup() {
     if (!this.defaultData) return;
+    console.info("Setting up storage...");
     const data = await this.storage.get(null);
     if (!data || Object.keys(data).length === 0) {
       await this.storage.set(this.defaultData);
     }
+    console.info("Storage setup complete");
   }
 
   async getAll() {
