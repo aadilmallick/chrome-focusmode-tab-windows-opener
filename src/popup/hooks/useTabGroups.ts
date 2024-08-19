@@ -9,11 +9,14 @@ const useTabGroups = () => {
   const { setTabGroups, tabGroups } = useApplicationStore();
   const [loading, setLoading] = React.useState(false);
 
-  async function addTabGroup(tabGroupName: string) {
+  async function addTabGroup(
+    tabGroupName: string,
+    links: TabGroup["links"] = []
+  ) {
     const tabGroup = {
       id: crypto.randomUUID(),
       name: tabGroupName,
-      links: [],
+      links: links,
     };
     setTabGroups(tabGroups.concat(tabGroup));
     await StorageHandler.addTabGroup(tabGroup);

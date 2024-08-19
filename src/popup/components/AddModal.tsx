@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import CustomDialog from "@/custom/CustomDialog";
 import useTabGroups from "../hooks/useTabGroups";
 import { useState } from "react";
+import { LucidePlus } from "lucide-react";
 
 const AddModal = () => {
   const { addTabGroup } = useTabGroups();
@@ -10,8 +11,12 @@ const AddModal = () => {
     <>
       <CustomDialog
         openButton={
-          <Button className="bg-green-400/50 text-green-600 rounded-full hover:bg-green-400/75 transition-colors">
-            Add new group +
+          <Button
+            className="bg-green-400/50 text-green-600 rounded-full shadow-md hover:bg-green-400/75 transition-colors"
+            size="icon"
+            title="Add new group"
+          >
+            <LucidePlus size="16" />
           </Button>
         }
         content={
