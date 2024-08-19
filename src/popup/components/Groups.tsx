@@ -16,9 +16,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { getButtonAccessibilityProps } from "app/utils/projectUtils";
 import AddLinkModal from "./AddLinkModal";
 import IconButton from "@/custom/IconButton";
+import Windows from "app/utils/api/windows";
+import { windowsStore } from "app/background/controllers/windowsController";
 
 const Groups = () => {
   const { tabGroups, loading } = useTabGroups();
@@ -58,17 +59,12 @@ const TabGroupItem = memo(({ tabGroup }: { tabGroup: TabGroup }) => {
 const OpenWindowButton = ({ tabGroup }: { tabGroup: TabGroup }) => {
   async function openWindow() {
     const linksToOpen = tabGroup.links.map((link) => link.url);
-    await chrome.windows.create({
-      url: linksToOpen,
-    });
+    const newWindow = new Windows(linksToOpen);
+    console.log("newWindow", newWindow);
+    await windowsStore.add(newWindow);
   }
   return (
-    <IconButton
-      onClick={async () => {
-        await openWindow();
-      }}
-      title="Open all links in a new window"
-    >
+    <IconButton onClick={openWindow} title="Open all links in a new window">
       <LucideExternalLink size="16" color="gray" />
     </IconButton>
   );

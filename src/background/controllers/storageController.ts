@@ -1,4 +1,5 @@
 import { LocalStorage, SyncStorage } from "app/utils/api/storage";
+import Windows from "app/utils/api/windows";
 
 export interface TabGroup {
   links: {
@@ -11,7 +12,12 @@ export interface TabGroup {
 }
 
 export const appStorage = new LocalStorage<Record<string, TabGroup | null>>();
-export const appSettingsStorage = new SyncStorage({});
+export const windowsStorage = new LocalStorage({
+  windows: [] as Windows[],
+});
+export const appSettingsStorage = new SyncStorage({
+  focusMode: false,
+});
 
 // define static methods here
 export class StorageHandler {

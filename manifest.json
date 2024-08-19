@@ -18,7 +18,7 @@
     "48": "public/icon.png",
     "128": "public/icon.png"
   },
-  "permissions": ["storage", "tabGroups", "tabs"],
+  "permissions": ["storage", "tabGroups", "tabs", "notifications"],
   "options_page": "src/options/options.html",
   "background": {
     "service_worker": "src/background/background.ts",
